@@ -17,10 +17,6 @@ static NetManager * manager = nil;
     dispatch_once(&once, ^{
         manager = [[self allocWithZone:NULL] init];
         
-        NSLog(@"%@", ([self class]));
-        
-        NSLog(@"%@", ([super class]));
-        
     });
     return manager;
 }
@@ -49,7 +45,7 @@ static NetManager * manager = nil;
 }
 
 -(NSString *)description{
-    return [NSString stringWithFormat:@"name = %@",name];
+    return [NSString stringWithFormat:@"name = %@ ,%p",name,self];
 
 }
 @end
