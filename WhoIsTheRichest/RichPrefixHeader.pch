@@ -1,0 +1,23 @@
+//
+//  RichPrefixHeader.pch
+//  WhoIsTheRichest
+//
+//  Created by WangPan on 16/2/25.
+//  Copyright © 2016年 Wang Pan. All rights reserved.
+//
+
+
+#ifndef RichPrefixHeader_pch
+#define RichPrefixHeader_pch
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef DEBUG
+#define DELog(fmt, ...) NSLog((@"===[lineNum:%d]" fmt), __LINE__, ##__VA_ARGS__);
+#define ErrLog(fmt, ...) NSLog((@"\n==Error********Start\n==Function:%s\n" "==LineNum:%d \n" "==" fmt "\n==Error********End"), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DELog(fmt, ...)
+#define ErrLog(fmt, ...)
+#endif
+
+#endif /* RichPrefixHeader_pch */
