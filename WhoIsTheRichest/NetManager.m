@@ -45,7 +45,6 @@ static NetManager * manager = nil;
 }
 
 -(NSString *)description{
-    return [NSString stringWithFormat:@"name = %@ ,%p",name,self];
-
+    return [NSString stringWithFormat:@"name = %@ ,%p , %p",name,self, name];
 }
 @end
