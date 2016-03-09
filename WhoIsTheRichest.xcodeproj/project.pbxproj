@@ -30,6 +30,7 @@
 		9208BACE1C7C2C200091E68B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9208BAC51C7C2C200091E68B /* UIWebView+AFNetworking.m */; };
 		9208BAD11C7C30CE0091E68B /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9208BAD01C7C30CE0091E68B /* NetManager.m */; };
 		92322C4A1C867ABA00F82138 /* CTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92322C491C867ABA00F82138 /* CTest.m */; };
+		923D89501C8D1F70008A65AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923D894F1C8D1F70008A65AD /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,8 @@
 		9208BAD01C7C30CE0091E68B /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
 		92322C481C867ABA00F82138 /* CTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTest.h; sourceTree = "<group>"; };
 		92322C491C867ABA00F82138 /* CTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTest.m; sourceTree = "<group>"; };
+		923D894E1C8D1F5B008A65AD /* WhoIsTheRichest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WhoIsTheRichest.entitlements; sourceTree = "<group>"; };
+		923D894F1C8D1F70008A65AD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		92FC283D1C7EEA64004B694C /* RichPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RichPrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923D89501C8D1F70008A65AD /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +101,7 @@
 		9208BA721C7C29690091E68B = {
 			isa = PBXGroup;
 			children = (
+				923D894F1C8D1F70008A65AD /* CloudKit.framework */,
 				9208BA7D1C7C29690091E68B /* WhoIsTheRichest */,
 				9208BA7C1C7C29690091E68B /* Products */,
 			);
@@ -113,6 +118,7 @@
 		9208BA7D1C7C29690091E68B /* WhoIsTheRichest */ = {
 			isa = PBXGroup;
 			children = (
+				923D894E1C8D1F5B008A65AD /* WhoIsTheRichest.entitlements */,
 				9208BA9E1C7C2AE10091E68B /* Main */,
 				9208BA9D1C7C2A730091E68B /* Sqlite */,
 				9208BA9B1C7C2A410091E68B /* Models */,
@@ -275,6 +281,11 @@
 				TargetAttributes = {
 					9208BA7A1C7C29690091E68B = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -449,6 +460,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = WhoIsTheRichest/WhoIsTheRichest.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/RichPrefixHeader.pch";
@@ -459,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.ipan.richest.WhoIsTheRichest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -469,6 +484,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = WhoIsTheRichest/WhoIsTheRichest.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/RichPrefixHeader.pch";
@@ -479,6 +497,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.ipan.richest.WhoIsTheRichest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -11,4 +11,5 @@
 @interface CTest : NSObject
 -(NSString*)plusBy:(NSString*)strings1 and:(NSString*)strings2;
 -(NSString*)multiByString:(NSString*)string1 and:(NSString*)string2;
+-(BOOL)string:(NSString*)string1 matchTo:(NSString*)string2;
 @end

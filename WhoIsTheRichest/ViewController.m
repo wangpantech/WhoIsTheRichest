@@ -59,27 +59,28 @@
     NSString * getStr =   object_getIvar(manager, name_ivar);
     NSLog(@"%@",getStr);
     // Do any additional setup after loading the view, typically from a nib.
-    dispatch_queue_t aqueue  = dispatch_get_main_queue();
+//    dispatch_queue_t aqueue  = dispatch_get_main_queue();
 
-    dispatch_async(aqueue, ^{
-        [self printHD];
-        DELog(@"end sy");
-    });
-    dispatch_async(aqueue, ^{
-        [self printSD];
-        DELog(@"end--asy");
-    });
+//    dispatch_async(aqueue, ^{
+//        [self printHD];
+//        DELog(@"end sy");
+//    });
+//    dispatch_async(aqueue, ^{
+//        [self printSD];
+//        DELog(@"end--asy");
+//    });
     
     
-//    NSString * string1 =                                                                            @"218140758923475009028430679850461237";
-//    NSString * string2 =  @"52431537641987205601562093650123700561270354718932678541907238647813252547";
-//
-//    CTest * ct = [[CTest alloc] init];
+    NSString * string1 =             @"218140758923475009028430679850461237";
+    NSString * string2 =             @"270354718932678541907238647813252547";
+
+    CTest * ct = [[CTest alloc] init];
 //    NSString * plus = [ct plusBy:string1 and:string2];
 //    DELog(@"%@",plus);
 //    NSString * multi = [ct multiByString:string1 and:string2];
 //    DELog(@"%@",multi);
-   
+    BOOL ie = [ct string:string1 matchTo:string2];
+    DELog(@"%d",ie);
 //    NSBlockOperation * bop = [NSBlockOperation blockOperationWithBlock:^{
 //        DELog(@"bop create");
 //    }];

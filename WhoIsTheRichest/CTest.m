@@ -7,15 +7,55 @@
 //
 
 #import "CTest.h"
-
+#import <UIKit/UIKit.h>
 @implementation CTest
 
+//z字符串匹配
+-(NSDictionary*)dictBystring:(NSString*)string{
+    NSMutableDictionary * dict  = [NSMutableDictionary dictionary];
+    for (int i = 0; i < string.length; i ++) {
+        NSString * valStr = @"1";
+        NSString * keyStr = [string substringWithRange:NSMakeRange(i, 1)];
+        id hasKey = [dict objectForKey:keyStr];
+        if ([hasKey class] != [NSNull class]) {
+            valStr = [NSString stringWithFormat:@"%d",[hasKey intValue] + 1];
+        }
+        [dict setObject:valStr forKey:keyStr];
+    }
+    return [NSDictionary dictionaryWithDictionary:dict];
+}
+
+-(BOOL)string:(NSString*)string1 matchTo:(NSString*)string2{
+    if (string1.length != string2.length) {
+        return NO;
+    }
+    NSDictionary * dict1 = [self dictBystring:string1];
+    NSDictionary * dict2 = [self dictBystring:string2];
+    if (dict1.count != dict2.count) {
+        return NO;
+    }
+    __block BOOL same = YES;
+    [dict1 enumerateKeysAndObjectsUsingBlock:^(NSString* key1, NSString *  obj1, BOOL * stop1) {
+        [dict2 enumerateKeysAndObjectsUsingBlock:^(NSString* key2, NSString *  obj2, BOOL * stop2) {
+            if ([key1 isEqualToString:key2] && ![obj1 isEqualToString:obj2]) {
+                same = NO;
+                *stop1 = YES;
+                *stop2 = YES;
+            }
+        }];
+    }];
+    return same;
+}
+
+
 //string 倒序加入数组
--(NSArray*)arrayByString:(NSString*)string{
+-(NSArray*)arrayByString:(NSString*)string longLen:(NSInteger)longLen{
     NSMutableArray * array = [NSMutableArray array];
+    for (int i = 0; i < longLen - string.length; i++) {
+        [array addObject:@"0"];
+    }
     for (int i = 0;  i < string.length; i++) {
-        NSString * oneStr = [string substringWithRange:NSMakeRange(string.length - 1 - i, 1) ];
-        [array addObject:oneStr];
+        [array addObject:[string substringWithRange:NSMakeRange(i, 1) ]];
     }
     return [NSArray arrayWithArray:array];
 }
@@ -28,56 +68,33 @@
         resultString =  [resultString stringByAppendingString:str];
     }
     DELog(@"%@",resultString);
-
+    
+    NSMutableAttributedString *aStr = [[NSMutableAttributedString alloc] initWithString:resultString];
+    [aStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, aStr.length - 1)];
+    CGSize aStrSize = [resultString sizeWithFont:[UIFont systemFontOfSize:16]];
+    CGSize seze = [resultString sizeWithAttributes:@{}];
     return resultString;
-}
-
-//一个数 + 一个数 + 进位数
--(NSArray*)one:(NSString *)one plus:(NSString*)another plus:(NSString*)tempTen{
-    NSString * tenTemp = @"0";
-    NSString * oneTemp = @"0";
-    int sum = [one intValue] + [another intValue] + [tempTen intValue];
-    if (sum >= 10) {
-        tenTemp = @"1";
-        oneTemp = [NSString stringWithFormat:@"%d",sum - 10];
-    }else{
-        oneTemp = [NSString stringWithFormat:@"%d",sum];
-    }
-    return [NSArray arrayWithObjects:oneTemp,tenTemp,nil];
 }
 
 //两个长数相加
 -(NSString*)plusBy:(NSString*)strings1 and:(NSString*)strings2{
-
-    NSString * longStr;
-    NSString * shortStr;
-    if (strings1.length >= strings2.length) {
-        longStr = strings1;
-        shortStr = strings2;
-    }else{
-        longStr = strings2;
-        shortStr = strings1;
-    }
-    NSArray * longArr = [self arrayByString:longStr];
-    NSArray * shortArr = [self arrayByString:shortStr];
+    
+    NSInteger len = strings1.length >= strings2.length? strings1.length : strings2.length;
+    NSArray * longArr = [self arrayByString:strings1 longLen:len];
+    NSArray * shortArr = [self arrayByString:strings2 longLen:len];
     
     NSMutableArray * resultArr = [NSMutableArray array];
-    NSString * tempTen = @"0";
-    for (int i = 0; i < longArr.count; i++) {
-        if ((int)shortArr.count - 1 - i >= 0) {
-            NSArray * resArr = [self one:longArr[i] plus:shortArr[i] plus:tempTen];
-            tempTen = resArr[1];
-            [resultArr addObject:resArr[0]];
+    int tempTen = 0;
+    for (int i = 0; i < len; i++) {
+        int sum = [longArr[len - 1-i] intValue] + [shortArr[len - 1 -i] intValue] + tempTen;
+        if (sum >= 10) {
+            tempTen = 1;
+            sum = sum - 10;
         }else{
-            if (tempTen.intValue > 0) {
-                NSArray * resArr = [self one:longArr[i] plus:@"0" plus:tempTen];
-                tempTen = resArr[1];
-                [resultArr addObject:resArr[0]];
-            }else{
-                [resultArr addObject:longArr[i]];
-            }
+            tempTen = 0;
         }
-        if (tempTen.intValue > 0 && longArr.count - i - 1 == 0) {
+        [resultArr addObject:[NSString stringWithFormat:@"%d",sum]];
+        if (tempTen > 0 && i == len - 1) {
             [resultArr addObject:@"1"];
         }
     }
@@ -101,7 +118,7 @@
 
 //一个数 * 一个长数 * 位数
 -(NSString *)oneNum:(NSString*)onestr mutliNums:(NSString *)strings andOffset:(int)num{
-    NSArray * strsArr = [self arrayByString:strings];
+    NSArray * strsArr = [self arrayByString:strings longLen:strings.length];
     NSString * tempTen = @"0";
     NSMutableArray * resultArr = [NSMutableArray array];
     for (int i = 0; i < num ;i++) {
@@ -122,7 +139,7 @@
 
 //两个长数相乘
 -(NSString*)multiByString:(NSString*)string1 and:(NSString*)string2{
-    NSArray * upArr = [self arrayByString:string1];
+    NSArray * upArr = [self arrayByString:string1 longLen:string1.length];
     NSMutableArray * mutliTempArr = [NSMutableArray array];
     
     for (int i = 0; i < upArr.count; i ++) {
@@ -135,6 +152,8 @@
     for (int i = 0; i < mutliTempArr.count; i ++) {
         tempString = [self plusBy:tempString and:mutliTempArr[i]];
     }
+    
+    
     return tempString;
 }
 
