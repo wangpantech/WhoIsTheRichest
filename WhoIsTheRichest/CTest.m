@@ -34,17 +34,24 @@
     if (dict1.count != dict2.count) {
         return NO;
     }
-    __block BOOL same = YES;
+    __block int rCount = 0;
     [dict1 enumerateKeysAndObjectsUsingBlock:^(NSString* key1, NSString *  obj1, BOOL * stop1) {
         [dict2 enumerateKeysAndObjectsUsingBlock:^(NSString* key2, NSString *  obj2, BOOL * stop2) {
-            if ([key1 isEqualToString:key2] && ![obj1 isEqualToString:obj2]) {
-                same = NO;
-                *stop1 = YES;
-                *stop2 = YES;
+            if ([key1 isEqualToString:key2]) {
+                if ([obj1 isEqualToString:obj2]) {
+                    rCount ++;
+                }else{
+                    *stop1 = YES;
+                    *stop2 = YES;
+                }
             }
         }];
     }];
-    return same;
+    if (rCount != dict1.count) {
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 

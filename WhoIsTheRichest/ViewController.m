@@ -12,7 +12,7 @@
 #import <objc/objc.h>
 #import "CTest.h"
 @interface ViewController ()
-
+@property (nonatomic, assign) NSInteger count;
 @end
 
 @implementation ViewController
@@ -28,7 +28,7 @@
     
     NSString * str  = nil;
     NSString * xtr = str ?: @"ccc";
-    
+    self.count = 0;
  
     NSLog(@"%p , %p,  %p , %p , %@",m1,m2,m3,m4,xtr);
     
@@ -104,7 +104,23 @@
 //    
 //    
     
-//    dispatch_group_t  group = dispatch_group_create();
+    dispatch_group_t  group = dispatch_group_create();
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i < 10; i ++) {
+            dispatch_group_enter(group);
+            if (i < 4) {
+                [self printSD];
+            }
+            if (i >=4 && i < 8) {
+                [self request];
+            }
+            if (i >= 8) {
+                [self printHD];
+            }
+            dispatch_group_leave(group);
+        }
+    });
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 //    dispatch_queue_t aqueue  = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 //    
 //    
@@ -162,13 +178,13 @@
 }
 
 -(void)printHD{
-    for (int i = 0; i < 10000; i ++) {
+    for (int i = 0; i < 100; i ++) {
         DELog(@"100-----%d",i);
     }
     DELog(@"end ----------------------------------------------------------------100");
 }
 -(void)printSD{
-    for (int i = 0; i < 10000; i ++) {
+    for (int i = 0; i < 1000; i ++) {
         DELog(@"1000-----%d",i);
     }
     DELog(@"end ----------------------------------------------------------------1000");
@@ -177,13 +193,13 @@
 -(void)request{
     
     DELog(@"req ----------------------------------------------------------------start");
-
+    self.count ++;
     NSString * url = @"http://op.juhe.cn/onebox/weather/query";
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:@"北京" forKey:@"cityname"];
     [dict setObject:@"6925c4934f3624cc823f5addaee0a091" forKey:@"key"];
     [[NetManager shareManager] POST:url parameters:dict success:^(id responsed) {
         NSDictionary * dict = responsed;
-        DELog(@"%@",dict);
+        DELog(@"%ld -- %@",self.count,dict);
     } failure:^(NSError *error) {
         
     }];
