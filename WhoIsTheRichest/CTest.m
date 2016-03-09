@@ -14,12 +14,9 @@
 -(NSDictionary*)dictBystring:(NSString*)string{
     NSMutableDictionary * dict  = [NSMutableDictionary dictionary];
     for (int i = 0; i < string.length; i ++) {
-        NSString * valStr = @"1";
         NSString * keyStr = [string substringWithRange:NSMakeRange(i, 1)];
         id hasKey = [dict objectForKey:keyStr];
-        if ([hasKey class] != [NSNull class]) {
-            valStr = [NSString stringWithFormat:@"%d",[hasKey intValue] + 1];
-        }
+        NSString* valStr = [NSString stringWithFormat:@"%d",[hasKey intValue] + 1];
         [dict setObject:valStr forKey:keyStr];
     }
     return [NSDictionary dictionaryWithDictionary:dict];

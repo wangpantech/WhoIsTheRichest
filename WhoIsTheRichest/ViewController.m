@@ -71,8 +71,8 @@
 //    });
     
     
-    NSString * string1 =             @"218140758923475009028430679850461237";
-    NSString * string2 =             @"270354718932678541907238647813252547";
+    NSString * string1 =             @"1234567891234567891";
+    NSString * string2 =             @"1122334455667788992";
 
     CTest * ct = [[CTest alloc] init];
 //    NSString * plus = [ct plusBy:string1 and:string2];
@@ -104,23 +104,23 @@
 //    
 //    
     
-    dispatch_group_t  group = dispatch_group_create();
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        for (int i = 0; i < 10; i ++) {
-            dispatch_group_enter(group);
-            if (i < 4) {
-                [self printSD];
-            }
-            if (i >=4 && i < 8) {
-                [self request];
-            }
-            if (i >= 8) {
-                [self printHD];
-            }
-            dispatch_group_leave(group);
-        }
-    });
-    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+//    dispatch_group_t  group = dispatch_group_create();
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        for (int i = 0; i < 10; i ++) {
+//            dispatch_group_enter(group);
+//            if (i < 4) {
+//                [self printSD];
+//            }
+//            if (i >=4 && i < 8) {
+//                [self request];
+//            }
+//            if (i >= 8) {
+//                [self printHD];
+//            }
+//            dispatch_group_leave(group);
+//        }
+//    });
+//    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 //    dispatch_queue_t aqueue  = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 //    
 //    
