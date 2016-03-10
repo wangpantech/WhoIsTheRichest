@@ -31,6 +31,8 @@
 		9208BAD11C7C30CE0091E68B /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9208BAD01C7C30CE0091E68B /* NetManager.m */; };
 		92322C4A1C867ABA00F82138 /* CTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92322C491C867ABA00F82138 /* CTest.m */; };
 		923D89501C8D1F70008A65AD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923D894F1C8D1F70008A65AD /* CloudKit.framework */; };
+		92C376D21C913CB200018928 /* CtestOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C376D11C913CB200018928 /* CtestOne.m */; };
+		92C376D51C91419600018928 /* CtestTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C376D41C91419600018928 /* CtestTwo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,10 @@
 		92322C491C867ABA00F82138 /* CTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTest.m; sourceTree = "<group>"; };
 		923D894E1C8D1F5B008A65AD /* WhoIsTheRichest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WhoIsTheRichest.entitlements; sourceTree = "<group>"; };
 		923D894F1C8D1F70008A65AD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		92C376D01C913CB200018928 /* CtestOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CtestOne.h; sourceTree = "<group>"; };
+		92C376D11C913CB200018928 /* CtestOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CtestOne.m; sourceTree = "<group>"; };
+		92C376D31C91419600018928 /* CtestTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CtestTwo.h; sourceTree = "<group>"; };
+		92C376D41C91419600018928 /* CtestTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CtestTwo.m; sourceTree = "<group>"; };
 		92FC283D1C7EEA64004B694C /* RichPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RichPrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +206,10 @@
 			children = (
 				92322C481C867ABA00F82138 /* CTest.h */,
 				92322C491C867ABA00F82138 /* CTest.m */,
+				92C376D01C913CB200018928 /* CtestOne.h */,
+				92C376D11C913CB200018928 /* CtestOne.m */,
+				92C376D31C91419600018928 /* CtestTwo.h */,
+				92C376D41C91419600018928 /* CtestTwo.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -331,6 +341,7 @@
 				9208BACB1C7C2C200091E68B /* UIImageView+AFNetworking.m in Sources */,
 				9208BA861C7C29690091E68B /* ViewController.m in Sources */,
 				9208BACA1C7C2C200091E68B /* UIButton+AFNetworking.m in Sources */,
+				92C376D51C91419600018928 /* CtestTwo.m in Sources */,
 				9208BA831C7C29690091E68B /* AppDelegate.m in Sources */,
 				9208BAAD1C7C2C120091E68B /* AFNetworkReachabilityManager.m in Sources */,
 				9208BACD1C7C2C200091E68B /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -344,6 +355,7 @@
 				9208BAD11C7C30CE0091E68B /* NetManager.m in Sources */,
 				9208BAAC1C7C2C120091E68B /* AFHTTPSessionManager.m in Sources */,
 				9208BAC71C7C2C200091E68B /* AFImageDownloader.m in Sources */,
+				92C376D21C913CB200018928 /* CtestOne.m in Sources */,
 				9208BAC91C7C2C200091E68B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,7 @@
     if (dict1.count != dict2.count) {
         return NO;
     }
-    __block int rCount = 0;
+    __block NSInteger rCount = 0;
     [dict1 enumerateKeysAndObjectsUsingBlock:^(NSString* key1, NSString *  obj1, BOOL * stop1) {
         [dict2 enumerateKeysAndObjectsUsingBlock:^(NSString* key2, NSString *  obj2, BOOL * stop2) {
             if ([key1 isEqualToString:key2]) {
@@ -44,11 +44,7 @@
             }
         }];
     }];
-    if (rCount != dict1.count) {
-        return NO;
-    }else{
-        return YES;
-    }
+    return rCount ==  dict1.count ? YES : NO;
 }
 
 
@@ -72,11 +68,6 @@
         resultString =  [resultString stringByAppendingString:str];
     }
     DELog(@"%@",resultString);
-    
-    NSMutableAttributedString *aStr = [[NSMutableAttributedString alloc] initWithString:resultString];
-    [aStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, aStr.length - 1)];
-    CGSize aStrSize = [resultString sizeWithFont:[UIFont systemFontOfSize:16]];
-    CGSize seze = [resultString sizeWithAttributes:@{}];
     return resultString;
 }
 
@@ -98,9 +89,9 @@
             tempTen = 0;
         }
         [resultArr addObject:[NSString stringWithFormat:@"%d",sum]];
-        if (tempTen > 0 && i == len - 1) {
-            [resultArr addObject:@"1"];
-        }
+    }
+    if (tempTen == 1) {
+        [resultArr addObject:@"1"];
     }
     return [self orderStringBy:resultArr];
 }

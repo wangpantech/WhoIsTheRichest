@@ -10,7 +10,10 @@
 #import "NetManager.h"
 #import <objc/Object.h>
 #import <objc/objc.h>
+#import <objc/runtime.h>
 #import "CTest.h"
+#import "CtestOne.h"
+#import "CtestTwo.h"
 @interface ViewController ()
 @property (nonatomic, assign) NSInteger count;
 @end
@@ -20,19 +23,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    CTest * c1 = [[CTest alloc] init];
+    CtestOne * co1 = [[CtestOne alloc] init];
+    DELog(@"%@",[co1 class]);
+    CtestTwo * ct2 = [[CtestTwo alloc] init];
+    if ([co1 isMemberOfClass:[c1 class]]) {
+        DELog(@"co1 ismo c1 class");
+    }
+    if ([co1 isKindOfClass:[c1 class]]) {
+        DELog(@"co1 isko c1 class");
+    }
+    
     NetManager * m1 = [NetManager shareManager];
     NetManager * m2 = [NetManager shareManager];
     
     NetManager * m3 = [[NetManager alloc] init];
     NetManager * m4 = [[NetManager alloc] init];
-    
+    UIButton * btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UIButton * btn2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+
+    UIView * sv1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+
+    if ([btn1 isMemberOfClass:[sv1 class]]) {
+        
+        DELog(@"btn1 ismo sv1");
+    }
+    if ([btn1 isKindOfClass:[sv1 class]]) {
+        DELog(@"%@",[sv1 class])
+        DELog(@"btn1 isko sv1");
+    }
+    if ([btn2 isMemberOfClass:[UIView class]]) {
+        DELog(@"b2 ismo uiview");
+    }
+    if ([btn2 isKindOfClass:[UIView class]]) {
+        DELog(@"%@",[UIView class]);
+        DELog(@"b2 isko uivew");
+    }
     NSString * str  = nil;
     NSString * xtr = str ?: @"ccc";
     self.count = 0;
  
     NSLog(@"%p , %p,  %p , %p , %@",m1,m2,m3,m4,xtr);
+    //sume test gitff
     
-
+    NSMutableArray * mArr = [NSMutableArray array];
+    [mArr enumerateObjectsUsingBlock:^(NSString* obj, NSUInteger idx, BOOL *  stop) {
+        
+    }];
     
     BOOL res1 = [(id)[NSObject class] isKindOfClass:[NSObject class]];
     
@@ -209,4 +246,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    unsigned int count = 0;
+    Class *classes = objc_copyClassList(&count);
+    DELog(@"%d",count);
+    for (int i = 0; i < count; i++) {
+        const char *cname = class_getName(classes[i]);
+        printf("%s\n", cname);
+    }
+}
 @end
